@@ -3,6 +3,8 @@
   import type { TodoItem } from "./lib/types";
 
   let todos: TodoItem[] = $state([]);
+  let title = $state("");
+  let description = $state("");
 
   async function fetchTodos() {
     try {
@@ -15,6 +17,29 @@
       todos = await response.json();
     } catch (e) {
       console.error("Could not connect to server. Ensure it is running.", e);
+    }
+  }
+
+  async function handleSubmit() {
+    const newTodo = { title, description };
+    try {
+      const response = await fetch("http://localhost:8080/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTodo),
+      });
+
+      if (response.ok) {
+        title = "";
+        description = "";
+        await fetchTodos();
+      } else {
+        console.error("Failed to add todo");
+      }
+    } catch (e) {
+      console.error("Error adding todo:", e);
     }
   }
 
@@ -37,9 +62,9 @@
 
   <h2 class="todo-list-form-header">Add a Todo</h2>
   <form class="todo-list-form">
-    <input placeholder="Title" name="title" />
-    <input placeholder="Description" name="description" />
-    <button>Add Todo</button>
+    <input placeholder="Title" name="title" bind:value={title} />
+    <input placeholder="Description" name="description" bind:value={description} />
+    <button type="button" onclick={handleSubmit}>Add Todo</button>
   </form>
 </main>
 
