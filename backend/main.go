@@ -30,7 +30,10 @@ func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 	//Handle GET request: return all todos
 	if r.Method == http.MethodGet {
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(todos)
+		if err := json.NewEncoder(w).Encode(todos); err != nil {
+			http.Error(w, "Failed to encode todos", http.StatusInternalServerError)
+			return
+		}
 		return
 	}
 
@@ -53,7 +56,10 @@ func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 
 		todos = append(todos, newTodo)
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(newTodo)
+		if err := json.NewEncoder(w).Encode(newTodo); err != nil {
+			http.Error(w, "Failed to encode response", http.StatusInternalServerError)
+			return
+		}
 		return
 
 	}
