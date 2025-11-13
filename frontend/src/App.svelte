@@ -42,7 +42,7 @@
   }
 
   async function handleSubmit() {
-    // Validate input
+    //Validate input
     const trimmedTitle = title.trim();
     const trimmedDescription = description.trim();
     
@@ -76,7 +76,7 @@
     }
   }
 
-  // Sort todos: urgent > medium > low, then completed at end
+  //Sort todos: urgent > medium > low, then completed at end
   function sortTodos(todos: TodoItem[]): TodoItem[] {
     const priorityOrder = { urgent: 0, medium: 1, low: 2 };
     return [...todos].sort((a, b) => {
@@ -84,7 +84,7 @@
       if (a.completed !== b.completed) {
         return a.completed ? 1 : -1;
       }
-      // Sort by priority
+      //Sort by priority
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
   }
@@ -129,7 +129,7 @@
     }
   }
 
-  // Initially fetch todos on page load
+  //Initially fetch todos on page load
   $effect(() => {
     fetchTodos();
   });

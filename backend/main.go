@@ -115,7 +115,7 @@ func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		
-		//find and remove the todo
+		//Find and remove the todo
 		found := false
 		for i, todo := range todos {
 			if todo.ID == id {
@@ -152,7 +152,7 @@ func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		
-		//decode the updated todo from request body
+		//Decode the updated todo from request body
 		var updatedTodo ToDo
 		err = json.NewDecoder(r.Body).Decode(&updatedTodo)
 		if err != nil {
@@ -166,7 +166,7 @@ func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		
-		//Vvalidate and set priority
+		//Validate and set priority
 		priority, err := validateAndSetPriority(updatedTodo.Priority)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)

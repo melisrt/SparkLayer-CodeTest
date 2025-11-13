@@ -24,7 +24,7 @@
   //If not editing: enters edit mode and initializes edit fields
   function handleEdit() {
     if (isEditing) {
-      // Validate before saving
+      //Validate before saving
       if (!editTitle.trim() || !editDescription.trim()) {
         alert("Title and description are required");
         return;
