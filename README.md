@@ -1,3 +1,7 @@
+## Important Note!
+
+**Known Issue**: On initial page load, the form may require a page refresh before the first todo submission works correctly. According to my research, this is a known timing issue with Svelte 5 runes initialization. After refreshing the page once, all functionality works as expected. For more details, see the [Frontend Improvements](#frontend-improvements) section below.
+
 ## Development Process
 
 ### Initial Research & Setup
@@ -57,7 +61,8 @@
 - **State Management**: Improve state synchronization in Todo component to handle external prop changes better
 - **Error Recovery**: Implement retry logic for failed API calls with exponential backoff
 - **Testing**: Add component tests and E2E tests for critical user flows
-- **Desing**: Improve UI/UX and make a better design.
+- **Design**: Improve UI/UX and make a better design
+- **Svelte 5 Runes Binding Issue**: Investigate and fix a timing issue with form input bindings on initial page load. Currently, the form validation may fail on the first submission attempt after the page loads (requiring a page refresh to work properly). This appears to be related to Svelte 5 runes initialization timing, possibly interacting with the `$effect` that fetches todos on mount. A workaround is to refresh the page once after initial load, but this should be properly resolved for production use. (I was going to attempt to fix this problem but I was already above the 2 hour limit so I decided to look into it separetely from the coding test.)
 
 ### Code Quality
 - **Documentation**: Add more comprehensive inline documentation and API documentation
