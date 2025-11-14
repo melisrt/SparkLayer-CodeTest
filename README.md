@@ -1,47 +1,64 @@
-Create the foundation of a to-do list application, focusing on backend functionality and essential frontend interaction. Your task is implementing a RESTful API using Go and a simple TypeScript interface using [Svelte](https://svelte.dev/). The goal is to be able to be able to list and add todos.
+## Development Process
 
-You are not expected to know Go, Svelte, or OpenAPI. Part of the challenge is to see how quickly you can adapt and pick new things up!
+### Initial Research & Setup
+- **30-40 minutes**: I made some research on Go and Svelte fundamentals, understanding the frameworks and their syntax
+- Setup of development environment
 
-The backend needs to meet the openapi spec which is within the backend folder. You need to create the list endpoint and the add todo endpoint. The storage system is in-memory.
+### My Implementation Process
 
-The frontend already has functionality to list the todos, your task is to complete the form which submits todo's to the backend system.
+**First Step: Core Requirements (40-50 minutes)**
+- Implemented basic backend functionality:
+  - GET endpoint to list todos
+  - POST endpoint to add todos
+  - In-memory storage system
+- Completed frontend form submission:
+  - Connected form to backend API
+  - Implemented basic error handling
+  - Form validation
 
-Please use this repo as your base. You can click "Use this template" in the top right on GitHub, then "Create a new repository". Commit and push your code so it can reviewed by us. Please get as far as you can within 2 hours.
+**Second Step: Enhancements & Improvements (70-80 minutes)**
+- I did some additional research on best practices for Go and Svelte to have a better understanding and wanted to make improvements in order to practice.
+- Implemented additional features:
+  - Priority system (urgent, medium, low) with sorting
+  - Todo completion status with checkboxes
+  - Edit and delete functionality
+  - Dark/light mode theme toggle
+  - Improved UI/UX
+- Code quality improvements:
+  - Error handling and validation
+  - Code organization and helper functions
+  - Accessibility improvements (ARIA labels) (This is just something I like to add!)
+  - Code comments and documentation
 
-If you find anything in the template you would like to improve, please feel free to!
+**Third Step: Testing**
+- Before submitting my code, I tested:
+  - Backend API endpoints
+  - Frontend form validations
+  - Priority system (selection, display, sorting)
+  - Completion status
+  - Edit functionality
+  - Delete functionality
+  - Theme toggle
 
+## What I Would Do If I Had More Time
+- After making a bit more research and also using AI as a tool to review and point possible weak sides of the code, these are some of the things I took a note of:
+### Backend Improvements
+- **Thread Safety**: Implement `sync.Mutex` to protect shared state (`todos` slice and `nextID`) from concurrent access, preventing race conditions in a production environment
+- **Constants**: Replace magic strings (priority values) with constants for better maintainability and type safety
+- **Logging**: Add structured logging for requests, errors, and important events to aid debugging and monitoring
+- **Configuration**: Make CORS origin configurable via environment variables instead of hardcoded `*` for production security
+- **Error Handling**: Implement more granular error types and standardized error response format
+- **Testing**: Add unit tests for handlers and validation functions, plus integration tests for API endpoints
 
-## Setup
+### Frontend Improvements
+- **Environment Configuration**: Move API URL to environment variables or config file for different environments
+- **User Experience**: Replace `alert()` with toast notifications for better UX and non-blocking error messages
+- **Loading States**: Add loading indicators and disable buttons during API calls to prevent duplicate submissions
+- **State Management**: Improve state synchronization in Todo component to handle external prop changes better
+- **Error Recovery**: Implement retry logic for failed API calls with exponential backoff
+- **Testing**: Add component tests and E2E tests for critical user flows
+- **Desing**: Improve UI/UX and make a better design.
 
-If not already installed, please install the following:
-1. Go ([install instructions](https://go.dev/doc/install))
-2. NPM/NodeJS. We recommend using [NVM](https://github.com/nvm-sh/nvm)
-
-We have tested this with Go 1.25 and Node 20. You may have issues if you try to use a different version.
-
-A good starting point would be to look at the following files:
-- `backend/main.go`
-- `frontend/src/App.svelte`
-
-## Running
-
-Open two separate terminals - one for the Svelte app and one for the golang API.
-
-
-### Golang API
-
-1. In the first terminal, change to the backend directory (`cd backend`)
-2. Run `go run main.go` to start the API server
-
-This must be running for the frontend to work.
-
-When you make a change, you must stop the server (`ctrl-c` in the terminal), and restart it with `go run main.go`.
-
-
-### Svelte App
-
-1. In the second terminal, change to the frontend directory (`cd frontend`)
-2. Run `npm run dev` to start the Svelte app
-3. If it doesn't open automatically, open [http://localhost:5173](http://localhost:5173) to view your website
-
-Leave this running. It will automatically update when you make any changes.
+### Code Quality
+- **Documentation**: Add more comprehensive inline documentation and API documentation
+- **Type Safety**: Further strengthen TypeScript types and add runtime validation where needed
